@@ -1,0 +1,6 @@
+# import config
+packagefile crypto/internal/boring=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b102\_pkg_.a
+packagefile crypto/internal/fips140/drbg=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b095\_pkg_.a
+packagefile crypto/internal/randutil=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b111\_pkg_.a
+packagefile internal/godebug=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b038\_pkg_.a
+packagefile io=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b060\_pkg_.a

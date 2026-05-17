@@ -1,0 +1,13 @@
+# import config
+packagefile bytes=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b072\_pkg_.a
+packagefile crypto/internal/fips140=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b081\_pkg_.a
+packagefile crypto/internal/fips140/bigmod=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b119\_pkg_.a
+packagefile crypto/internal/fips140/check=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b084\_pkg_.a
+packagefile crypto/internal/fips140/drbg=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b095\_pkg_.a
+packagefile crypto/internal/fips140/hmac=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b085\_pkg_.a
+packagefile crypto/internal/fips140/nistec=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b107\_pkg_.a
+packagefile crypto/internal/fips140/sha512=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b093\_pkg_.a
+packagefile errors=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b006\_pkg_.a
+packagefile hash=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b077\_pkg_.a
+packagefile io=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b060\_pkg_.a
+packagefile sync=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b040\_pkg_.a

@@ -1,0 +1,9 @@
+# import config
+packagefile internal/abi=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b008\_pkg_.a
+packagefile internal/goarch=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b009\_pkg_.a
+packagefile internal/stringslite=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b036\_pkg_.a
+packagefile internal/sync=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b041\_pkg_.a
+packagefile runtime=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b012\_pkg_.a
+packagefile sync=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b040\_pkg_.a
+packagefile sync/atomic=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b042\_pkg_.a
+packagefile weak=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b121\_pkg_.a

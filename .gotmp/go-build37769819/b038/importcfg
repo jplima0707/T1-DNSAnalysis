@@ -1,0 +1,5 @@
+# import config
+packagefile internal/bisect=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b039\_pkg_.a
+packagefile internal/godebugs=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b018\_pkg_.a
+packagefile sync=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b040\_pkg_.a
+packagefile sync/atomic=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b042\_pkg_.a

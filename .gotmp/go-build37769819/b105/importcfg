@@ -1,0 +1,11 @@
+# import config
+packagefile bytes=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b072\_pkg_.a
+packagefile crypto=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b076\_pkg_.a
+packagefile crypto/internal/boring=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b102\_pkg_.a
+packagefile crypto/internal/fips140/ecdh=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b106\_pkg_.a
+packagefile crypto/internal/fips140/edwards25519/field=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b109\_pkg_.a
+packagefile crypto/internal/fips140only=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b099\_pkg_.a
+packagefile crypto/internal/rand=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b110\_pkg_.a
+packagefile crypto/subtle=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b101\_pkg_.a
+packagefile errors=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b006\_pkg_.a
+packagefile io=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b060\_pkg_.a

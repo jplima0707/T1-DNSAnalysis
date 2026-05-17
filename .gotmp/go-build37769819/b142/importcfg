@@ -1,0 +1,8 @@
+# import config
+importmap golang.org/x/crypto/internal/alias=vendor/golang.org/x/crypto/internal/alias
+packagefile crypto/cipher=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b079\_pkg_.a
+packagefile encoding/binary=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b141\_pkg_.a
+packagefile errors=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b006\_pkg_.a
+packagefile vendor/golang.org/x/crypto/internal/alias=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b143\_pkg_.a
+packagefile math/bits=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b035\_pkg_.a
+packagefile runtime=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b012\_pkg_.a

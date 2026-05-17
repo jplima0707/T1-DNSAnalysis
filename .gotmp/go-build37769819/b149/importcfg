@@ -1,0 +1,5 @@
+# import config
+packagefile crypto/internal/fips140/alias=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b083\_pkg_.a
+packagefile crypto/internal/fips140only=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b099\_pkg_.a
+packagefile errors=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b006\_pkg_.a
+packagefile strconv=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b058\_pkg_.a

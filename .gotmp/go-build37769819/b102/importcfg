@@ -1,0 +1,5 @@
+# import config
+packagefile crypto=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b076\_pkg_.a
+packagefile crypto/cipher=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b079\_pkg_.a
+packagefile crypto/internal/boring/sig=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b103\_pkg_.a
+packagefile hash=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b077\_pkg_.a

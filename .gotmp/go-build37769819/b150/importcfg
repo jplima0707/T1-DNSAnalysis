@@ -1,0 +1,18 @@
+# import config
+packagefile crypto=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b076\_pkg_.a
+packagefile crypto/internal/boring=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b102\_pkg_.a
+packagefile crypto/internal/boring/bbig=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b117\_pkg_.a
+packagefile crypto/internal/fips140/bigmod=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b119\_pkg_.a
+packagefile crypto/internal/fips140/rsa=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b151\_pkg_.a
+packagefile crypto/internal/fips140hash=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b122\_pkg_.a
+packagefile crypto/internal/fips140only=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b099\_pkg_.a
+packagefile crypto/internal/rand=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b110\_pkg_.a
+packagefile crypto/rand=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b132\_pkg_.a
+packagefile crypto/subtle=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b101\_pkg_.a
+packagefile errors=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b006\_pkg_.a
+packagefile fmt=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b054\_pkg_.a
+packagefile hash=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b077\_pkg_.a
+packagefile internal/godebug=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b038\_pkg_.a
+packagefile io=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b060\_pkg_.a
+packagefile math=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b057\_pkg_.a
+packagefile math/big=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b115\_pkg_.a
