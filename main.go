@@ -1,102 +1,68 @@
 package main
 
 import (
+	"fmt"
+
+	"T1-DNSAnalysis/analyzer"
 	"T1-DNSAnalysis/config"
 	"T1-DNSAnalysis/dns"
-	"T1-DNSAnalysis/models"
-	"T1-DNSAnalysis/utils"
-	"fmt"
-	"time"
 )
 
 func main() {
 
-	domain := "reddit.com"
+	domain := "www.example.com"
 
-	servers := config.GetIPs()
+	results := dns.
+		BenchmarkAllServers(
 
-	fmt.Println(
-		"=========== SCAN SEQUENCIAL ==========",
-	)
+			config.GetIPs(),
 
-	start := time.Now()
+			domain,
 
-	seq := dns.SequentialScan(
+			10,
+		)
 
-		servers,
-		domain,
-	)
-
-	fmt.Println(
-		"Tempo total:",
-		time.Since(start),
-	)
-
-	printResults(seq)
-
-	fmt.Println()
+	analyzer.
+		SortRanking(
+			results,
+		)
 
 	fmt.Println(
-		"=========== SCAN GOROUTINES ============",
+		"========== RANKING ===========",
 	)
 
-	start = time.Now()
+	for i, r := range results {
 
-	conc := dns.ConcurrentScan(
+		fmt.Printf(
 
-		servers,
-		domain,
-	)
+			"%d - %s\n",
 
-	fmt.Println(
-		"Tempo total:",
-		time.Since(start),
-	)
+			i+1,
 
-	printResults(conc)
-
-}
-
-func printResults(
-
-	results []models.DNSResponse,
-
-) {
-
-	for _, r := range results {
-
-		fmt.Println(
-			"Servidor:",
 			r.Server,
 		)
 
-		if r.Error != nil {
-
-			fmt.Println(
-				r.Error,
-			)
-
-			continue
-		}
-
 		fmt.Println(
-			"Tempo:",
-			r.ResponseTime,
+			"AVG:",
+			r.Avg,
 		)
 
 		fmt.Println(
-			"IPs:",
-			r.IPs,
+			"MIN:",
+			r.Min,
 		)
 
 		fmt.Println(
-			"RCode:",
-			utils.ExplainRcode(
-				r.RCode,
-			),
+			"MAX:",
+			r.Max,
 		)
 
-		fmt.Println()
+		fmt.Println(
+			"LOSS:",
+			r.Loss,
+			"%\n",
+		)
+
 	}
 
 }
