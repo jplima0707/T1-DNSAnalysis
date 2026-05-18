@@ -1,7 +1,0 @@
-./constants.go
-./output.go
-./packet_builder.go
-./packet_parser.go
-./scanner.go
-./tls_client.go
-./udp_client.go

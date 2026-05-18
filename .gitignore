@@ -1,7 +1,1 @@
-.gocache/
-.gotmp/
-.go-appdata/
-.go-home/
-*.tmp
-*.bak
-config/*.go.*
+*.csv

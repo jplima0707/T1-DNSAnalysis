@@ -1,8 +1,0 @@
-# import config
-packagefile bytes=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b072\_pkg_.a
-packagefile crypto/internal/fips140=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b081\_pkg_.a
-packagefile crypto/internal/fips140/sha256=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b086\_pkg_.a
-packagefile crypto/internal/fips140/sha3=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b090\_pkg_.a
-packagefile crypto/internal/fips140/sha512=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b093\_pkg_.a
-packagefile errors=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b006\_pkg_.a
-packagefile hash=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b077\_pkg_.a

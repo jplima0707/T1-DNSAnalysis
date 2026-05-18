@@ -1,9 +1,0 @@
-# import config
-packagefile crypto/internal/constanttime=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b092\_pkg_.a
-packagefile crypto/internal/fips140/check=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b084\_pkg_.a
-packagefile crypto/internal/fips140/nistec/fiat=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b108\_pkg_.a
-packagefile crypto/internal/fips140deps/byteorder=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b087\_pkg_.a
-packagefile errors=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b006\_pkg_.a
-packagefile math/bits=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b035\_pkg_.a
-packagefile runtime=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b012\_pkg_.a
-packagefile sync=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b040\_pkg_.a

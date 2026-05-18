@@ -1,222 +1,142 @@
 package dns
 
 import (
-	"sort"
+	"T1-DNSAnalysis/analyzer"
+	"T1-DNSAnalysis/models"
 	"sync"
 	"time"
-
-	"T1-DNSAnalysis/config"
-	"T1-DNSAnalysis/models"
-	"T1-DNSAnalysis/utils"
 )
 
-func TimeoutFromMillis(timeoutMs int) time.Duration {
-	if timeoutMs <= 0 {
-		timeoutMs = 3000
+func QueryServer(
+	server models.DNSServer,
+	domain string,
+	protocol models.Protocol,
+) models.DNSResponse {
+
+	packet := BuildDNSQuery(
+		domain,
+	)
+
+	var (
+		response []byte
+		elapsed  time.Duration
+		err      error
+	)
+
+	switch protocol {
+
+	case models.UDP:
+
+		response,
+			elapsed,
+			err =
+			SendUDPQuery(
+				server.IP,
+				packet,
+			)
+
+	case models.DOT:
+
+		response,
+			elapsed,
+			err =
+			SendDoTQuery(
+				server.IP,
+				packet,
+			)
 	}
-	return time.Duration(timeoutMs) * time.Millisecond
+
+	if err != nil {
+
+		return models.DNSResponse{
+			Server: server.Name,
+			RCode:  -1,
+			Error:  err,
+		}
+	}
+
+	ips,
+		rcode :=
+		ParseResponse(
+			response,
+		)
+
+	return models.DNSResponse{
+		Server:       server.Name,
+		IPs:          ips,
+		RCode:        rcode,
+		ResponseTime: elapsed,
+	}
 }
 
-func BenchmarkAllServers(servers []config.DNSServer, domain string, attempts int, protocol string, timeout time.Duration) []models.ServerReport {
-	if attempts <= 0 {
-		attempts = 10
-	}
+func ScanServers(
+	servers []models.DNSServer,
+	domain string,
+	protocol models.Protocol,
 
-	results := make(chan models.ServerReport, len(servers))
+) models.ScanResult {
+
 	var wg sync.WaitGroup
 
+	channel := make(
+		chan models.DNSResponse,
+		len(servers),
+	)
+
 	for _, server := range servers {
+
 		wg.Add(1)
 
-		go func(s config.DNSServer) {
+		go func(
+			s models.DNSServer,
+		) {
+
 			defer wg.Done()
-			results <- BenchmarkServer(s, domain, attempts, protocol, timeout)
+
+			result :=
+				QueryServer(
+					s,
+					domain,
+					protocol,
+				)
+
+			channel <- result
+
 		}(server)
 	}
 
 	wg.Wait()
-	close(results)
 
-	var reports []models.ServerReport
-	for report := range results {
-		reports = append(reports, report)
+	close(channel)
+
+	var responses []models.DNSResponse
+
+	for r := range channel {
+
+		responses =
+			append(
+				responses,
+				r,
+			)
 	}
 
-	return reports
-}
+	blocked :=
 
-func BenchmarkServer(server config.DNSServer, domain string, attempts int, protocol string, timeout time.Duration) models.ServerReport {
-	report := models.ServerReport{
-		ServerName: server.Name,
-		Provider:   server.Provider,
-		ServerIP:   server.IP,
-		Protocol:   protocol,
-		Attempts:   attempts,
-		RCodes:     make(map[int]int),
+		analyzer.
+			DetectBlocking(
+				responses,
+			)
+
+	consensus :=
+
+		analyzer.
+			DetectConsensus(
+				responses,
+			)
+
+	return models.ScanResult{
+		Responses: responses,
+		Blocked:   blocked,
+		Consensus: consensus,
 	}
-
-	var durations []time.Duration
-	uniqueIPs := make(map[string]struct{})
-
-	for attempt := 1; attempt <= attempts; attempt++ {
-		query := models.QueryResult{
-			Attempt:  attempt,
-			Protocol: protocol,
-		}
-
-		var (
-			response *models.ParsedDNSResponse
-			elapsed  time.Duration
-			err      error
-		)
-
-		switch protocol {
-		case ProtocolDoT:
-			response, elapsed, err = SendDoTQuery(server, domain, timeout)
-		default:
-			response, elapsed, err = SendUDPQuery(server.IP, domain, timeout)
-		}
-
-		query.ResponseTime = elapsed
-
-		if err != nil {
-			query.Error = err.Error()
-			report.Losses++
-			report.Results = append(report.Results, query)
-			continue
-		}
-
-		report.Successes++
-		report.RCodes[response.RCode]++
-		query.Response = response
-		report.Results = append(report.Results, query)
-		durations = append(durations, elapsed)
-
-		for _, record := range response.Records {
-			if record.Type == 1 {
-				uniqueIPs[record.Data] = struct{}{}
-			}
-		}
-	}
-
-	report.LossRate = float64(report.Losses) * 100 / float64(report.Attempts)
-	report.IPs = utils.SortedKeys(uniqueIPs)
-	report.Findings = append(report.Findings, evaluateStandaloneFindings(report)...)
-
-	if len(durations) > 0 {
-		report.Min, report.Max, report.Avg = durationStats(durations)
-	}
-
-	return report
-}
-
-func ApplyCrossServerChecks(reports []models.ServerReport) {
-	ipOwners := make(map[string][]string)
-
-	for _, report := range reports {
-		for _, ip := range report.IPs {
-			ipOwners[ip] = append(ipOwners[ip], report.ServerName)
-		}
-	}
-
-	allIPSets := make(map[string]struct{})
-	for _, report := range reports {
-		if len(report.IPs) == 0 {
-			continue
-		}
-		allIPSets[utils.JoinIPs(report.IPs)] = struct{}{}
-	}
-
-	divergent := len(allIPSets) > 1
-
-	for i := range reports {
-		if divergent {
-			reports[i].Findings = appendUnique(reports[i].Findings, "IPs divergentes entre servidores")
-		}
-
-		for _, ip := range reports[i].IPs {
-			if len(ipOwners[ip]) == 1 {
-				reports[i].Findings = appendUnique(reports[i].Findings, "IP exclusivo encontrado apenas neste servidor: "+ip)
-			}
-		}
-	}
-}
-
-func SortReports(reports []models.ServerReport) {
-	sort.Slice(reports, func(i, j int) bool {
-		if reports[i].LossRate != reports[j].LossRate {
-			return reports[i].LossRate < reports[j].LossRate
-		}
-
-		if reports[i].Avg != reports[j].Avg {
-			if reports[i].Avg == 0 {
-				return false
-			}
-			if reports[j].Avg == 0 {
-				return true
-			}
-			return reports[i].Avg < reports[j].Avg
-		}
-
-		return reports[i].ServerName < reports[j].ServerName
-	})
-}
-
-func durationStats(durations []time.Duration) (time.Duration, time.Duration, time.Duration) {
-	min := durations[0]
-	max := durations[0]
-	var total time.Duration
-
-	for _, duration := range durations {
-		if duration < min {
-			min = duration
-		}
-		if duration > max {
-			max = duration
-		}
-		total += duration
-	}
-
-	return min, max, total / time.Duration(len(durations))
-}
-
-func evaluateStandaloneFindings(report models.ServerReport) []string {
-	var findings []string
-
-	for rcode, count := range report.RCodes {
-		switch rcode {
-		case 3:
-			findings = append(findings, "Respostas NXDOMAIN observadas: "+utils.Itoa(count))
-		case 5:
-			findings = append(findings, "Respostas REFUSED observadas: "+utils.Itoa(count))
-		}
-	}
-
-	for _, ip := range report.IPs {
-		if ip == "0.0.0.0" {
-			findings = append(findings, "Possivel bloqueio por sinkhole: 0.0.0.0")
-		}
-		if ip == "127.0.0.1" {
-			findings = append(findings, "Possivel redirecionamento local: 127.0.0.1")
-		}
-	}
-
-	if len(report.IPs) == 0 && report.Successes > 0 {
-		findings = append(findings, "Sem registros A nas respostas bem-sucedidas")
-	}
-
-	if report.LossRate > 0 {
-		findings = append(findings, "Houve perda de consultas")
-	}
-
-	return findings
-}
-
-func appendUnique(values []string, value string) []string {
-	for _, current := range values {
-		if current == value {
-			return values
-		}
-	}
-	return append(values, value)
 }

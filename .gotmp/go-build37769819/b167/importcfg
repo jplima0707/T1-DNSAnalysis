@@ -1,9 +1,0 @@
-# import config
-packagefile errors=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b006\_pkg_.a
-packagefile fmt=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b054\_pkg_.a
-packagefile internal/godebug=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b038\_pkg_.a
-packagefile net/netip=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b165\_pkg_.a
-packagefile path=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b066\_pkg_.a
-packagefile slices=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b048\_pkg_.a
-packagefile strconv=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b058\_pkg_.a
-packagefile strings=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b071\_pkg_.a

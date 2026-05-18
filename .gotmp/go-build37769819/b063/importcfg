@@ -1,9 +1,0 @@
-# import config
-packagefile errors=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b006\_pkg_.a
-packagefile internal/oserror=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b047\_pkg_.a
-packagefile internal/runtime/syscall/windows=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b033\_pkg_.a
-packagefile internal/syscall/windows/sysdll=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b045\_pkg_.a
-packagefile runtime=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b012\_pkg_.a
-packagefile structs=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b064\_pkg_.a
-packagefile sync=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b040\_pkg_.a
-packagefile syscall=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b046\_pkg_.a

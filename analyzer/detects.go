@@ -2,92 +2,119 @@ package analyzer
 
 import (
 	"T1-DNSAnalysis/models"
-	"fmt"
+	"sort"
+	"strings"
 )
 
 func DetectBlocking(
 	results []models.DNSResponse,
-) {
+) bool {
 
 	for _, r := range results {
 
-		fmt.Println(
-			"\nServidor:",
-			r.Server,
-		)
-
-		switch r.RCode {
-
-		case 3:
-			fmt.Println(
-				"Possível NXDOMAIN",
-			)
-
-		case 5:
-			fmt.Println(
-				"Consulta recusada",
-			)
+		if r.RCode == -1 {
+			continue
 		}
+
+		if r.RCode == 3 {
+			return true
+		}
+
+		if r.RCode == 5 {
+			return true
+		}
+
+		/*
+			IPs clássicos
+			de bloqueio
+		*/
 
 		for _, ip := range r.IPs {
 
 			if ip == "127.0.0.1" ||
 				ip == "0.0.0.0" {
 
-				fmt.Println(
-					"Possível bloqueio:",
-					ip,
-				)
+				return true
 			}
 		}
 	}
+
+	return false
 }
 
 func DetectConsensus(
+
 	results []models.DNSResponse,
-) {
-	ipCount := make(
+
+) models.ConsensusResponse {
+
+	response := models.ConsensusResponse{}
+
+	groupCount := make(
 		map[string]int,
+	)
+
+	serverGroups := make(
+		map[string][]string,
 	)
 
 	for _, r := range results {
 
-		for _, ip := range r.IPs {
+		if r.RCode == -1 {
 
-			ipCount[ip]++
+			continue
 		}
+
+		ips := append(
+			[]string{},
+			r.IPs...,
+		)
+
+		sort.Strings(
+			ips,
+		)
+
+		key := strings.Join(
+			ips,
+			";",
+		)
+
+		groupCount[key]++
+
+		serverGroups[r.Server] = ips
 	}
 
-	var major string
 	max := 0
+	var major string
 
-	for ip, n := range ipCount {
+	for k, n := range groupCount {
 
 		if n > max {
 
 			max = n
-
-			major = ip
+			major = k
 		}
 	}
 
-	fmt.Println(
-		"\nIP consenso:",
-		major,
-	)
+	response.Consensus = major
 
-	for _, r := range results {
+	for server, ips := range serverGroups {
 
-		for _, ip := range r.IPs {
+		key := strings.Join(
+			ips,
+			";",
+		)
 
-			if ip != major {
-
-				fmt.Println(
-					r.Server,
-					"IP divergente:",
-					ip,
-				)
-			}
+		if key != major {
+			response.Outliers =
+				append(
+					response.Outliers,
+					models.Outlier{
+						Server: server,
+						IPs:    ips,
+					})
 		}
 	}
+
+	return response
 }
