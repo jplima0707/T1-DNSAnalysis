@@ -1,11 +1,13 @@
 package models
 
-import "time"
+import (
+	"time"
+)
 
 type DNSResponse struct {
 	Server       string
 	IPs          []string
-	RCode        int
+	RCode        string
 	ResponseTime time.Duration
 	Error        error
 }

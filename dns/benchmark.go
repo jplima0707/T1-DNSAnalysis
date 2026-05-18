@@ -7,12 +7,10 @@ import (
 )
 
 func BenchmarkServer(
-
-	server string,
-
+	server models.DNSServer,
 	domain string,
-
 	times int,
+	protocol models.Protocol,
 
 ) models.BenchmarkResult {
 
@@ -23,6 +21,7 @@ func BenchmarkServer(
 		r := QueryServer(
 			server,
 			domain,
+			protocol,
 		)
 
 		results = append(
@@ -43,7 +42,7 @@ func BenchmarkServer(
 }
 
 func ComputeBenchmark(
-	server string,
+	server models.DNSServer,
 	results []models.DNSResponse,
 
 ) models.BenchmarkResult {
@@ -78,40 +77,40 @@ func ComputeBenchmark(
 
 	}
 
+	lossPercent := (float64(loss) /
+		float64(len(results)) * 100)
+
 	avg := time.Duration(0)
 
 	if valid > 0 {
-
 		avg =
 			total /
 				time.Duration(valid)
 	}
 
+	if valid == 0 {
+		min = 0
+		max = 0
+	}
+
 	return models.BenchmarkResult{
 
-		Server: server,
-
-		Results: results,
-
-		Avg: avg,
-
-		Min: min,
-
-		Max: max,
-
-		Loss: float64(loss) /
-			float64(len(results)) * 100,
+		ServerName: server.Name,
+		ServerIP:   server.IP,
+		Results:    results,
+		Avg:        avg,
+		Min:        min,
+		Max:        max,
+		Loss:       lossPercent,
 	}
 
 }
 
 func BenchmarkAllServers(
-
-	servers []string,
-
+	servers []models.DNSServer,
 	domain string,
-
 	times int,
+	protocol models.Protocol,
 
 ) []models.BenchmarkResult {
 
@@ -127,7 +126,7 @@ func BenchmarkAllServers(
 		wg.Add(1)
 
 		go func(
-			s string,
+			s models.DNSServer,
 		) {
 
 			defer wg.Done()
@@ -137,6 +136,7 @@ func BenchmarkAllServers(
 					s,
 					domain,
 					times,
+					protocol,
 				)
 
 			channel <- result

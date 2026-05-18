@@ -6,6 +6,8 @@ func ExplainRcode(
 
 	switch code {
 
+	case -1:
+		return "NETWORK ERROR"
 	case 0:
 		return "OK"
 

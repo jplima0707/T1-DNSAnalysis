@@ -18,12 +18,12 @@ func DetectBlocking(
 
 		switch r.RCode {
 
-		case 3:
+		case "NXDOMAIN":
 			fmt.Println(
 				"Possível NXDOMAIN",
 			)
 
-		case 5:
+		case "REFUSED":
 			fmt.Println(
 				"Consulta recusada",
 			)

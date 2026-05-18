@@ -2,49 +2,80 @@ package dns
 
 import (
 	"T1-DNSAnalysis/models"
+	"T1-DNSAnalysis/utils"
 	"sync"
+	"time"
 )
 
 func QueryServer(
-	server string,
+	server models.DNSServer,
 	domain string,
+	protocol models.Protocol,
+
 ) models.DNSResponse {
 
 	packet := BuildDNSQuery(
 		domain,
 	)
 
-	response,
-		elapsed,
-		err := SendUDPQuery(
-		server,
-		packet,
+	var (
+		response []byte
+		elapsed  time.Duration
+		err      error
 	)
+
+	switch protocol {
+
+	case models.UDP:
+
+		response,
+			elapsed,
+			err =
+
+			SendUDPQuery(
+				server.IP,
+				packet,
+			)
+
+	case models.DOT:
+
+		response,
+			elapsed,
+			err =
+
+			SendDoTQuery(
+				server.IP,
+				packet,
+			)
+
+	}
 
 	if err != nil {
 
 		return models.DNSResponse{
-			Server: server,
+			Server: server.IP,
 			Error:  err,
+			RCode:  utils.ExplainRcode(-1),
 		}
 	}
 
-	ips, rcode := ParseResponse(
+	ips,
+		rcode := ParseResponse(
 		response,
 	)
 
 	return models.DNSResponse{
-		Server:       server,
+		Server:       server.IP,
 		IPs:          ips,
-		RCode:        rcode,
+		RCode:        utils.ExplainRcode(rcode),
 		ResponseTime: elapsed,
 	}
 }
 
 func SequentialScan(
-
-	servers []string,
+	servers []models.DNSServer,
 	domain string,
+	protocol models.Protocol,
 
 ) []models.DNSResponse {
 
@@ -55,6 +86,7 @@ func SequentialScan(
 		result := QueryServer(
 			server,
 			domain,
+			protocol,
 		)
 
 		results = append(
@@ -69,9 +101,9 @@ func SequentialScan(
 }
 
 func ConcurrentScan(
-
-	servers []string,
+	servers []models.DNSServer,
 	domain string,
+	protocol models.Protocol,
 
 ) []models.DNSResponse {
 
@@ -87,7 +119,7 @@ func ConcurrentScan(
 		wg.Add(1)
 
 		go func(
-			s string,
+			s models.DNSServer,
 		) {
 
 			defer wg.Done()
@@ -95,6 +127,7 @@ func ConcurrentScan(
 			result := QueryServer(
 				s,
 				domain,
+				protocol,
 			)
 
 			results <- result
