@@ -7,7 +7,7 @@ import (
 type DNSResponse struct {
 	Server       string
 	IPs          []string
-	RCode        string
+	RCode        int
 	ResponseTime time.Duration
 	Error        error
 }

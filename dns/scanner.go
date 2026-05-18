@@ -1,8 +1,8 @@
 package dns
 
 import (
+	"T1-DNSAnalysis/analyzer"
 	"T1-DNSAnalysis/models"
-	"T1-DNSAnalysis/utils"
 	"sync"
 	"time"
 )
@@ -11,7 +11,6 @@ func QueryServer(
 	server models.DNSServer,
 	domain string,
 	protocol models.Protocol,
-
 ) models.DNSResponse {
 
 	packet := BuildDNSQuery(
@@ -31,7 +30,6 @@ func QueryServer(
 		response,
 			elapsed,
 			err =
-
 			SendUDPQuery(
 				server.IP,
 				packet,
@@ -42,74 +40,45 @@ func QueryServer(
 		response,
 			elapsed,
 			err =
-
 			SendDoTQuery(
 				server.IP,
 				packet,
 			)
-
 	}
 
 	if err != nil {
 
 		return models.DNSResponse{
-			Server: server.IP,
+			Server: server.Name,
+			RCode:  -1,
 			Error:  err,
-			RCode:  utils.ExplainRcode(-1),
 		}
 	}
 
 	ips,
-		rcode := ParseResponse(
-		response,
-	)
+		rcode :=
+		ParseResponse(
+			response,
+		)
 
 	return models.DNSResponse{
-		Server:       server.IP,
+		Server:       server.Name,
 		IPs:          ips,
-		RCode:        utils.ExplainRcode(rcode),
+		RCode:        rcode,
 		ResponseTime: elapsed,
 	}
 }
 
-func SequentialScan(
+func ScanServers(
 	servers []models.DNSServer,
 	domain string,
 	protocol models.Protocol,
 
-) []models.DNSResponse {
-
-	var results []models.DNSResponse
-
-	for _, server := range servers {
-
-		result := QueryServer(
-			server,
-			domain,
-			protocol,
-		)
-
-		results = append(
-			results,
-			result,
-		)
-
-	}
-
-	return results
-
-}
-
-func ConcurrentScan(
-	servers []models.DNSServer,
-	domain string,
-	protocol models.Protocol,
-
-) []models.DNSResponse {
+) models.ScanResult {
 
 	var wg sync.WaitGroup
 
-	results := make(
+	channel := make(
 		chan models.DNSResponse,
 		len(servers),
 	)
@@ -124,33 +93,50 @@ func ConcurrentScan(
 
 			defer wg.Done()
 
-			result := QueryServer(
-				s,
-				domain,
-				protocol,
-			)
+			result :=
+				QueryServer(
+					s,
+					domain,
+					protocol,
+				)
 
-			results <- result
+			channel <- result
 
 		}(server)
-
 	}
 
 	wg.Wait()
 
-	close(results)
+	close(channel)
 
-	var output []models.DNSResponse
+	var responses []models.DNSResponse
 
-	for r := range results {
+	for r := range channel {
 
-		output = append(
-			output,
-			r,
-		)
-
+		responses =
+			append(
+				responses,
+				r,
+			)
 	}
 
-	return output
+	blocked :=
 
+		analyzer.
+			DetectBlocking(
+				responses,
+			)
+
+	consensus :=
+
+		analyzer.
+			DetectConsensus(
+				responses,
+			)
+
+	return models.ScanResult{
+		Responses: responses,
+		Blocked:   blocked,
+		Consensus: consensus,
+	}
 }

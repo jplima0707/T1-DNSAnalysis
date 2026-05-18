@@ -5,55 +5,53 @@ import "T1-DNSAnalysis/models"
 var Servers = []models.DNSServer{
 
 	//Sem filtro
-	{"Google", "8.8.8.8"},
-	{"Google Secondary", "8.8.4.4"},
+	{Name: "Google", IP: "8.8.8.8"},
+	{Name: "Google Secondary", IP: "8.8.4.4"},
 
-	{"Cloudflare", "1.1.1.1"},
-	{"Cloudflare Secondary", "1.0.0.1"},
+	{Name: "Cloudflare", IP: "1.1.1.1"},
+	{Name: "Cloudflare Secondary", IP: "1.0.0.1"},
 
-	{"Quad9 No Filter", "9.9.9.10"},
+	{Name: "Quad9 No Filter", IP: "9.9.9.10"},
 
-	{"Verisign", "64.6.64.6"},
+	{Name: "Verisign", IP: "64.6.64.6"},
 
 	//Segurança
-	{"Quad9 Secure", "9.9.9.9"},
+	{Name: "Quad9 Secure", IP: "9.9.9.9"},
 
-	{"OpenDNS", "208.67.222.222"},
+	{Name: "OpenDNS", IP: "208.67.222.222"},
 
-	{"CleanBrowsing Security",
-		"185.228.168.9"},
+	{Name: "CleanBrowsing Security",
+		IP: "185.228.168.9"},
 
-	{"AdGuard DNS",
-		"94.140.14.14"},
+	{Name: "AdGuard DNS",
+		IP: "94.140.14.14"},
 
 	//Family
-	{"Cloudflare Family",
-		"1.1.1.3"},
+	{Name: "Cloudflare Family",
+		IP: "1.1.1.3"},
 
-	{"OpenDNS Family",
-		"208.67.222.123"},
+	{Name: "OpenDNS Family",
+		IP: "208.67.222.123"},
 
-	{"CleanBrowsing Family",
-		"185.228.168.168"},
+	{Name: "CleanBrowsing Family",
+		IP: "185.228.168.168"},
 
-	{"AdGuard Family",
-		"94.140.14.15"},
+	{Name: "AdGuard Family",
+		IP: "94.140.14.15"},
 
 	//Adicionados
-	{"ControlD",
-		"76.76.2.0"},
+	{Name: "ControlD", IP: "76.76.2.0"},
 
-	{"Comodo Secure",
-		"8.26.56.26"},
+	{Name: "Comodo Secure", IP: "8.26.56.26"},
 
-	{"Comodo Secure Secondary",
-		"8.20.247.20"},
+	{Name: "Comodo Secure Secondary",
+		IP: "8.20.247.20"},
 
-	{"Alternate DNS",
-		"76.76.19.19"},
+	{Name: "Alternate DNS",
+		IP: "76.76.19.19"},
 
-	{"DNS Sistema Operacional",
-		"192.168.0.1"},
+	{Name: "DNS Sistema Operacional",
+		IP: "192.168.0.1"},
 }
 
 func GetIPs() []models.DNSServer {
@@ -75,8 +73,8 @@ func GetIPs() []models.DNSServer {
 func GetDoTHosts() []models.DNSServer {
 
 	return []models.DNSServer{
-		{"Google", "dns.google"},
-		{"Cloudflare", "one.one.one.one"},
-		{"Quad9", "dns.quad9.net"},
+		{Name: "Google", IP: "dns.google"},
+		{Name: "Cloudflare", IP: "one.one.one.one"},
+		{Name: "Quad9", IP: "dns.quad9.net"},
 	}
 }

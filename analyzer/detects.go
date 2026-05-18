@@ -2,55 +2,61 @@ package analyzer
 
 import (
 	"T1-DNSAnalysis/models"
-	"fmt"
 )
 
 func DetectBlocking(
 	results []models.DNSResponse,
-) {
+) bool {
 
 	for _, r := range results {
 
-		fmt.Println(
-			"\nServidor:",
-			r.Server,
-		)
-
-		switch r.RCode {
-
-		case "NXDOMAIN":
-			fmt.Println(
-				"Possível NXDOMAIN",
-			)
-
-		case "REFUSED":
-			fmt.Println(
-				"Consulta recusada",
-			)
+		if r.RCode == -1 {
+			continue
 		}
+
+		if r.RCode == 3 {
+			return true
+		}
+
+		if r.RCode == 5 {
+			return true
+		}
+
+		/*
+			IPs clássicos
+			de bloqueio
+		*/
 
 		for _, ip := range r.IPs {
 
 			if ip == "127.0.0.1" ||
 				ip == "0.0.0.0" {
 
-				fmt.Println(
-					"Possível bloqueio:",
-					ip,
-				)
+				return true
 			}
 		}
 	}
+
+	return false
 }
 
 func DetectConsensus(
 	results []models.DNSResponse,
-) {
+) models.ConsensusResponse {
+
 	ipCount := make(
 		map[string]int,
 	)
 
+	response := models.ConsensusResponse{
+		Outliers: []models.Outlier{},
+	}
+
 	for _, r := range results {
+
+		if r.RCode == -1 {
+			continue
+		}
 
 		for _, ip := range r.IPs {
 
@@ -58,7 +64,9 @@ func DetectConsensus(
 		}
 	}
 
+	// Identifica consenso
 	var major string
+
 	max := 0
 
 	for ip, n := range ipCount {
@@ -71,23 +79,34 @@ func DetectConsensus(
 		}
 	}
 
-	fmt.Println(
-		"\nIP consenso:",
-		major,
-	)
+	response.Consensus =
+		major
 
+	//	Identifica outliers
 	for _, r := range results {
+
+		if r.RCode == -1 {
+			continue
+		}
 
 		for _, ip := range r.IPs {
 
 			if ip != major {
 
-				fmt.Println(
-					r.Server,
-					"IP divergente:",
-					ip,
-				)
+				response.Outliers =
+					append(
+						response.Outliers,
+
+						models.Outlier{
+
+							Server: r.Server,
+
+							IP: ip,
+						},
+					)
 			}
 		}
 	}
+
+	return response
 }

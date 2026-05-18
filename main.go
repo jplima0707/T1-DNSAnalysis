@@ -1,27 +1,27 @@
 package main
 
 import (
+	"fmt"
+
 	"T1-DNSAnalysis/analyzer"
 	"T1-DNSAnalysis/config"
 	"T1-DNSAnalysis/dns"
 	"T1-DNSAnalysis/models"
 	"T1-DNSAnalysis/utils"
-	"fmt"
 )
 
 func main() {
 
 	domain := "reddit.com"
 
-	// UDP
 	runUDP(domain)
 
-	// DoT
 	runDoT(domain)
-
 }
 
-func runUDP(domain string) {
+func runUDP(
+	domain string,
+) {
 
 	fmt.Println(
 		"\n===================================",
@@ -35,16 +35,29 @@ func runUDP(domain string) {
 		"===================================",
 	)
 
-	results := dns.BenchmarkAllServers(
+	/*
+		SCANNER
+	*/
 
+	scan := dns.ScanServers(
 		config.GetIPs(),
-
 		domain,
-
-		10,
-
 		models.UDP,
 	)
+
+	printScan(scan)
+
+	/*
+		BENCHMARK
+	*/
+
+	results :=
+		dns.BenchmarkAllServers(
+			config.GetIPs(),
+			domain,
+			10,
+			models.UDP,
+		)
 
 	analyzer.SortRanking(
 		results,
@@ -55,14 +68,11 @@ func runUDP(domain string) {
 	)
 
 	err := utils.SaveCSV(
-
 		"udp_results.csv",
-
 		results,
 	)
 
 	if err != nil {
-
 		panic(err)
 	}
 
@@ -71,30 +81,38 @@ func runUDP(domain string) {
 	)
 }
 
-func runDoT(domain string) {
+func runDoT(
+	domain string,
+) {
 
 	fmt.Println(
 		"\n===================================",
 	)
-
 	fmt.Println(
 		"DNS over TLS",
 	)
-
 	fmt.Println(
 		"===================================",
 	)
 
-	results := dns.BenchmarkAllServers(
+	scan :=
+		dns.ScanServers(
+			config.GetDoTHosts(),
+			domain,
+			models.DOT,
+		)
 
-		config.GetDoTHosts(),
-
-		domain,
-
-		10,
-
-		models.DOT,
+	printScan(
+		scan,
 	)
+
+	results :=
+		dns.BenchmarkAllServers(
+			config.GetDoTHosts(),
+			domain,
+			10,
+			models.DOT,
+		)
 
 	analyzer.SortRanking(
 		results,
@@ -105,20 +123,58 @@ func runDoT(domain string) {
 	)
 
 	err := utils.SaveCSV(
-
 		"dot_results.csv",
-
 		results,
 	)
 
 	if err != nil {
-
 		panic(err)
 	}
 
 	fmt.Println(
 		"\nCSV DoT criado",
 	)
+}
+
+func printScan(
+	scan models.ScanResult,
+) {
+
+	fmt.Println(
+		"\nANÁLISE\n",
+	)
+
+	fmt.Println(
+		"Bloqueado:",
+		scan.Blocked,
+	)
+
+	fmt.Println(
+		"Consenso:",
+		scan.Consensus.Consensus,
+	)
+
+	if len(
+		scan.Consensus.Outliers,
+	) > 0 {
+
+		fmt.Println(
+			"\nDivergentes:",
+		)
+
+		for _, o := range scan.Consensus.Outliers {
+
+			fmt.Printf(
+				"%s => %s\n",
+
+				o.Server,
+
+				o.IP,
+			)
+		}
+	}
+
+	fmt.Println()
 }
 
 func printBenchmark(
@@ -133,8 +189,11 @@ func printBenchmark(
 
 		fmt.Printf(
 			"%d - %s = %s\n",
+
 			i+1,
+
 			r.ServerName,
+
 			r.ServerIP,
 		)
 
@@ -159,23 +218,47 @@ func printBenchmark(
 			"%",
 		)
 
-		if len(
-			r.Results,
-		) > 0 {
+		valid :=
+			getFirstValid(
+				r.Results,
+			)
 
-			first := r.Results[0]
+		if valid != nil {
 
 			fmt.Println(
 				"RCODE:",
-				first.RCode,
+				utils.ExplainRcode(
+					valid.RCode,
+				),
 			)
 
 			fmt.Println(
 				"IPs:",
-				first.IPs,
+				valid.IPs,
+			)
+
+		} else {
+
+			fmt.Println(
+				"Todas consultas falharam",
 			)
 		}
 
 		fmt.Println()
 	}
+}
+
+func getFirstValid(
+	results []models.DNSResponse,
+) *models.DNSResponse {
+
+	for i := range results {
+
+		if results[i].Error == nil {
+
+			return &results[i]
+		}
+	}
+
+	return nil
 }
