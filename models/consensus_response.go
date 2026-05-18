@@ -7,5 +7,5 @@ type ConsensusResponse struct {
 
 type Outlier struct {
 	Server string
-	IP     string
+	IPs    []string
 }

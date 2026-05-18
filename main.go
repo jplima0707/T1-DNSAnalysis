@@ -169,7 +169,7 @@ func printScan(
 
 				o.Server,
 
-				o.IP,
+				o.IPs,
 			)
 		}
 	}

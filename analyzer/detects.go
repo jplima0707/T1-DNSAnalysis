@@ -2,6 +2,8 @@ package analyzer
 
 import (
 	"T1-DNSAnalysis/models"
+	"sort"
+	"strings"
 )
 
 func DetectBlocking(
@@ -41,70 +43,76 @@ func DetectBlocking(
 }
 
 func DetectConsensus(
+
 	results []models.DNSResponse,
+
 ) models.ConsensusResponse {
 
-	ipCount := make(
+	response := models.ConsensusResponse{}
+
+	groupCount := make(
 		map[string]int,
 	)
 
-	response := models.ConsensusResponse{
-		Outliers: []models.Outlier{},
-	}
+	serverGroups := make(
+		map[string][]string,
+	)
 
 	for _, r := range results {
 
 		if r.RCode == -1 {
+
 			continue
 		}
 
-		for _, ip := range r.IPs {
+		ips := append(
+			[]string{},
+			r.IPs...,
+		)
 
-			ipCount[ip]++
-		}
+		sort.Strings(
+			ips,
+		)
+
+		key := strings.Join(
+			ips,
+			";",
+		)
+
+		groupCount[key]++
+
+		serverGroups[r.Server] = ips
 	}
 
-	// Identifica consenso
+	max := 0
 	var major string
 
-	max := 0
-
-	for ip, n := range ipCount {
+	for k, n := range groupCount {
 
 		if n > max {
 
 			max = n
-
-			major = ip
+			major = k
 		}
 	}
 
-	response.Consensus =
-		major
+	response.Consensus = major
 
-	//	Identifica outliers
-	for _, r := range results {
+	for server, ips := range serverGroups {
 
-		if r.RCode == -1 {
-			continue
-		}
+		key := strings.Join(
+			ips,
+			";",
+		)
 
-		for _, ip := range r.IPs {
-
-			if ip != major {
-
-				response.Outliers =
-					append(
-						response.Outliers,
-
-						models.Outlier{
-
-							Server: r.Server,
-
-							IP: ip,
-						},
-					)
-			}
+		if key != major {
+			response.Outliers =
+				append(
+					response.Outliers,
+					models.Outlier{
+						Server: server,
+						IPs:    ips,
+					})
 		}
 	}
 
