@@ -12,7 +12,7 @@ import (
 
 func main() {
 
-	domain := "reddit.com"
+	domain := "internetbadguys.com"
 
 	runUDP(domain)
 
@@ -145,7 +145,7 @@ func printScan(
 	)
 
 	fmt.Println(
-		"Bloqueado:",
+		"Houve bloqueios:",
 		scan.Blocked,
 	)
 

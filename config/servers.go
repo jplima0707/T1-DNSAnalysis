@@ -46,12 +46,6 @@ var Servers = []models.DNSServer{
 
 	{Name: "Comodo Secure Secondary",
 		IP: "8.20.247.20"},
-
-	{Name: "Alternate DNS",
-		IP: "76.76.19.19"},
-
-	{Name: "DNS Sistema Operacional",
-		IP: "192.168.0.1"},
 }
 
 func GetIPs() []models.DNSServer {
