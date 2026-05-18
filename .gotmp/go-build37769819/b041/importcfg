@@ -1,0 +1,5 @@
+# import config
+packagefile internal/abi=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b008\_pkg_.a
+packagefile internal/goarch=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b009\_pkg_.a
+packagefile internal/race=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b030\_pkg_.a
+packagefile sync/atomic=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b042\_pkg_.a

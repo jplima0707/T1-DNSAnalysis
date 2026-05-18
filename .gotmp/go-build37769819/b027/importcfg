@@ -1,0 +1,8 @@
+# import config
+packagefile internal/abi=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b008\_pkg_.a
+packagefile internal/asan=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b028\_pkg_.a
+packagefile internal/goarch=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b009\_pkg_.a
+packagefile internal/msan=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b029\_pkg_.a
+packagefile internal/race=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b030\_pkg_.a
+packagefile internal/runtime/math=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b031\_pkg_.a
+packagefile internal/runtime/sys=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b026\_pkg_.a

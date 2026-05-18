@@ -1,0 +1,5 @@
+# import config
+packagefile crypto/cipher=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b079\_pkg_.a
+packagefile crypto/internal/boring=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b102\_pkg_.a
+packagefile crypto/internal/fips140/aes=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b080\_pkg_.a
+packagefile strconv=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b058\_pkg_.a

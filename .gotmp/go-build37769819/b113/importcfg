@@ -1,0 +1,22 @@
+# import config
+importmap golang.org/x/crypto/cryptobyte=vendor/golang.org/x/crypto/cryptobyte
+importmap golang.org/x/crypto/cryptobyte/asn1=vendor/golang.org/x/crypto/cryptobyte/asn1
+packagefile crypto=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b076\_pkg_.a
+packagefile crypto/ecdh=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b105\_pkg_.a
+packagefile crypto/elliptic=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b114\_pkg_.a
+packagefile crypto/internal/boring=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b102\_pkg_.a
+packagefile crypto/internal/boring/bbig=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b117\_pkg_.a
+packagefile crypto/internal/fips140/ecdsa=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b118\_pkg_.a
+packagefile crypto/internal/fips140/nistec=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b107\_pkg_.a
+packagefile crypto/internal/fips140cache=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b120\_pkg_.a
+packagefile crypto/internal/fips140hash=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b122\_pkg_.a
+packagefile crypto/internal/fips140only=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b099\_pkg_.a
+packagefile crypto/internal/rand=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b110\_pkg_.a
+packagefile crypto/sha512=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b124\_pkg_.a
+packagefile crypto/subtle=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b101\_pkg_.a
+packagefile errors=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b006\_pkg_.a
+packagefile vendor/golang.org/x/crypto/cryptobyte=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b125\_pkg_.a
+packagefile vendor/golang.org/x/crypto/cryptobyte/asn1=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b128\_pkg_.a
+packagefile io=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b060\_pkg_.a
+packagefile math/big=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b115\_pkg_.a
+packagefile math/rand/v2=C:\Users\dorne\OneDrive\Desktop\T1-DNSAnalysis\.gotmp\go-build37769819\b112\_pkg_.a
