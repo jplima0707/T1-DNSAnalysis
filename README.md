@@ -26,15 +26,13 @@ Ferramenta em Go para analisar respostas DNS tradicionais por UDP/53 e DNS over 
 
 ## Como executar
 
-```bash
-go run . -domain example.com -attempts 10 -timeout-ms 3000
-```
-
-Voce tambem pode passar o dominio como argumento posicional:
+O domínio usado pela aplicação é definido diretamente em `main.go` na variável `domain`. Basta alterar esse valor e executar:
 
 ```bash
-go run . example.com
+go run .
 ```
+
+Por exemplo, abra `main.go`, ajuste `domain := "internetbadguys.com"` para o domínio desejado e rode `go run .`.
 
 ## Como interpretar a saida
 
